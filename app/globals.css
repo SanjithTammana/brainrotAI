@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,6 +19,9 @@
   --color-border: #2b6544;
   --color-danger: #ffb4ab;
   --shadow-panel: 0 24px 70px rgba(0, 12, 7, 0.44);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-utility: "DM Mono", "Cascadia Mono", ui-monospace, monospace;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 12px;
@@ -33,7 +38,21 @@ body {
   min-height: 100dvh;
   background: var(--color-bg);
   color: var(--color-ink);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body);
+}
+
+.MuiTypography-root,
+.MuiInputBase-root {
+  font-family: var(--font-body) !important;
+}
+
+.MuiButton-root {
+  font-family: var(--font-utility) !important;
+  letter-spacing: -0.025em;
+}
+
+.MuiTypography-root.display-type {
+  font-family: var(--font-display) !important;
 }
 
 /* Scrollbar Styling */
@@ -56,41 +75,248 @@ body {
   background: var(--color-accent);
 }
 
-.mascot {
-  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+.mascot-character {
+  --mascot-x: 0px;
+  --mascot-y: 0px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 320px);
+  min-height: 150px;
+  cursor: default;
 }
 
-.mascot-concerned {
-  filter: saturate(1.15) drop-shadow(0 10px 8px rgba(244, 135, 120, 0.24));
+.mascot-character[data-compact='true'] {
+  min-height: 48px;
 }
 
-.mascot-deeply-cooked {
-  filter: saturate(1.35) contrast(1.05) drop-shadow(0 11px 9px rgba(244, 135, 120, 0.5));
-  transform: rotate(-4deg);
+.mascot-character[data-compact='true'] .mascot-body img {
+  width: 52px;
+  max-height: 52px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .mascot:hover {
-    transform: rotate(-2deg) translateY(-4px);
-  }
+.mascot-character[data-compact='true'] .mascot-shadow,
+.mascot-character[data-compact='true'] .mascot-spark,
+.mascot-character[data-compact='true'] .mascot-status {
+  display: none;
 }
+
+.mascot-body {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(0deg);
+  transform-origin: 50% 82%;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease;
+  filter: drop-shadow(0 18px 12px rgba(0, 21, 12, 0.28));
+}
+
+.mascot-body img {
+  display: block;
+  width: min(100%, 320px);
+  max-height: 280px;
+  object-fit: contain;
+}
+
+.mascot-arm {
+  position: absolute;
+  z-index: -1;
+  top: 48%;
+  width: 22%;
+  height: 7%;
+  border: 9px solid #376f3d;
+  border-radius: 999px;
+  background: #86be68;
+  box-shadow: inset 0 -3px 0 rgba(16, 56, 25, 0.35);
+  transform-origin: 12% 50%;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease;
+}
+
+.mascot-arm-left { left: 5%; transform: rotate(18deg); }
+.mascot-arm-right { right: 4%; transform: scaleX(-1) rotate(18deg); transform-origin: 88% 50%; }
+
+.mascot-shadow {
+  position: absolute;
+  z-index: -1;
+  bottom: 5%;
+  width: 52%;
+  height: 8%;
+  border-radius: 50%;
+  background: rgba(0, 15, 8, 0.28);
+  filter: blur(7px);
+  transform: scaleX(1);
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.mascot-spark {
+  position: absolute;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-butter);
+  box-shadow: 0 0 0 5px rgba(247, 214, 111, 0.12);
+  opacity: 0;
+}
+
+.mascot-spark-one { top: 18%; right: 13%; }
+.mascot-spark-two { bottom: 27%; left: 12%; width: 5px; }
+
+.mascot-status {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: -22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  max-width: 90%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 0.69rem;
+  font-weight: 750;
+  line-height: 1.15;
+  transform: translateX(-50%);
+}
+
+.mascot-status-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(139, 207, 141, 0.15);
+}
+
+.mascot-magic-words {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.mascot-magic-words span {
+  position: absolute;
+  display: inline-block;
+  max-width: 12ch;
+  overflow: hidden;
+  color: var(--color-butter);
+  font-size: clamp(0.7rem, 1.4vw, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 18px rgba(247, 214, 111, 0.62);
+  transform-origin: center;
+}
+
+.mascot-magic-words span:nth-child(1) { top: 16%; left: -6%; transform: rotate(-14deg); }
+.mascot-magic-words span:nth-child(2) { top: 50%; right: -10%; transform: rotate(10deg); color: var(--color-accent-strong); }
+.mascot-magic-words span:nth-child(3) { bottom: 13%; left: 8%; transform: rotate(-5deg); color: var(--color-coral); }
+.mascot-magic-words[data-mood='concerned'] span { animation: arcane-wobble 620ms ease-in-out infinite alternate; }
+.mascot-magic-words[data-mood='deeply-cooked'] span { animation: arcane-pull 380ms ease-in-out infinite alternate; }
+
+.mascot-character[data-mood='concerned'] .mascot-body {
+  filter: saturate(1.15) drop-shadow(0 14px 11px rgba(244, 135, 120, 0.32));
+  transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(-2deg);
+}
+
+.mascot-character[data-mood='concerned'] .mascot-arm-left { transform: translateY(12px) rotate(42deg); }
+.mascot-character[data-mood='concerned'] .mascot-arm-right { transform: translateY(12px) scaleX(-1) rotate(42deg); }
+
+.mascot-character[data-mood='concerned'] .mascot-status-dot { background: var(--color-butter); }
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-body {
+  filter: saturate(0.72) sepia(0.68) contrast(1.2) hue-rotate(-30deg) drop-shadow(0 18px 12px rgba(117, 63, 28, 0.65));
+  transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(-8deg) scale(0.92, 1.05);
+}
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-body img {
+  clip-path: polygon(2% 0, 94% 3%, 100% 18%, 95% 37%, 100% 59%, 92% 73%, 96% 97%, 66% 92%, 48% 100%, 31% 91%, 5% 96%, 9% 70%, 0 48%, 7% 30%);
+}
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-arm {
+  filter: sepia(0.9) saturate(0.7) brightness(0.7);
+}
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-arm-left { transform: translate(-8px, 14px) rotate(76deg) scale(0.78); }
+.mascot-character[data-mood='deeply-cooked'] .mascot-arm-right { transform: translate(9px, -5px) scaleX(-1) rotate(-28deg) scale(0.85); }
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-body::after {
+  content: '';
+  position: absolute;
+  inset: 9% 13%;
+  pointer-events: none;
+  background: repeating-linear-gradient(116deg, transparent 0 13px, rgba(50, 29, 12, 0.64) 14px 16px, transparent 17px 30px);
+  mix-blend-mode: multiply;
+  opacity: 0.74;
+  transform: rotate(-7deg);
+}
+
+.mascot-character[data-mood='deeply-cooked'] .mascot-status-dot { background: var(--color-coral); }
+.mascot-character[data-mood='deeply-cooked'] .mascot-spark { opacity: 1; }
+
+.mascot-character[data-activity='thinking'] .mascot-spark { opacity: 1; }
+.mascot-character[data-activity='thinking'] .mascot-shadow { opacity: 0.65; transform: scaleX(0.86); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .mascot-thinking {
-    animation: mascot-consult 760ms ease-in-out infinite alternate;
-  }
-
-  .mascot-deeply-cooked {
-    animation: mascot-cooked 420ms ease-in-out infinite alternate;
-  }
+  .mascot-character[data-activity='thinking'] .mascot-body { animation: mascot-consult 760ms ease-in-out infinite alternate; }
+  .mascot-character[data-activity='thinking'] .mascot-spark-one { animation: mascot-orbit-one 900ms ease-in-out infinite alternate; }
+  .mascot-character[data-activity='thinking'] .mascot-spark-two { animation: mascot-orbit-two 760ms ease-in-out infinite alternate; }
+  .mascot-character[data-mood='deeply-cooked'] .mascot-body { animation: mascot-cooked 440ms ease-in-out infinite alternate; }
+  .mascot-character[data-mood='deeply-cooked'] { animation: mascot-stalk 1.15s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate; }
+  .mascot-character[data-mood='deeply-cooked'] .mascot-arm-left { animation: mascot-arm-shake 125ms linear infinite alternate; }
+  .mascot-character[data-mood='deeply-cooked'] .mascot-arm-right { animation: mascot-arm-flail 170ms linear infinite alternate; }
+  .mascot-character[data-mood='concerned'] .mascot-body { animation: mascot-wilt 1.2s ease-in-out infinite alternate; }
 }
 
 @keyframes mascot-consult {
-  from { transform: rotate(-2deg) translateY(0); }
-  to { transform: rotate(2deg) translateY(-7px); }
+  from { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(-2deg) translateY(0); }
+  to { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(2deg) translateY(-7px); }
 }
 
 @keyframes mascot-cooked {
-  from { transform: rotate(-4deg) translateX(-2px); }
-  to { transform: rotate(3deg) translateX(3px) translateY(-3px); }
+  from { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(-9deg) translateX(-4px) scale(0.92, 1.05); }
+  to { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(5deg) translateX(5px) translateY(-5px) scale(0.88, 1.11); }
+}
+
+@keyframes mascot-wilt {
+  from { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(-2deg) translateY(2px); }
+  to { transform: translate3d(var(--mascot-x), var(--mascot-y), 0) rotate(5deg) translateY(15px) scale(0.96, 1.04); }
+}
+
+@keyframes mascot-stalk {
+  from { translate: -14px 3px; }
+  to { translate: 18px -5px; }
+}
+
+@keyframes mascot-arm-shake {
+  from { transform: translate(-8px, 14px) rotate(70deg) scale(0.78); }
+  to { transform: translate(-2px, 7px) rotate(91deg) scale(0.86); }
+}
+
+@keyframes mascot-arm-flail {
+  from { transform: translate(9px, -5px) scaleX(-1) rotate(-31deg) scale(0.85); }
+  to { transform: translate(15px, 7px) scaleX(-1) rotate(21deg) scale(0.92); }
+}
+
+@keyframes mascot-orbit-one { from { transform: translate(0, 0); } to { transform: translate(-12px, -9px); } }
+@keyframes mascot-orbit-two { from { transform: translate(0, 0); } to { transform: translate(9px, 7px); } }
+@keyframes arcane-wobble { from { margin-top: 0; } to { margin-top: -7px; } }
+@keyframes arcane-pull { from { opacity: 0.72; scale: 0.94; } to { opacity: 1; scale: 1.08; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .magic-message > div { animation: spell-arrive 440ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+@keyframes spell-arrive {
+  from { opacity: 0; transform: translate3d(-22px, 10px, 0) rotate(-2deg); filter: blur(3px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-body, .mascot-shadow, .mascot-spark, .mascot-magic-words span, .magic-message > div { animation: none !important; transition: none !important; }
 }

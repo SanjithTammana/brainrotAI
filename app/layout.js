@@ -9,7 +9,7 @@ const geistSans = localFont({
 
 export const metadata = {
   title: "BrainrotAI",
-  description: "A conversational AI bridging generational gaps.",
+  description: "Translate between internet slang and clear, everyday English.",
 };
 
 export default function RootLayout({ children }) {

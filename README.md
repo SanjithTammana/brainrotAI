@@ -7,7 +7,7 @@ BrainrotAI is a small web translator for moving between internet slang and clear
 - Translates brainrot or internet slang into plain English.
 - Translates plain English into contemporary, readable internet slang.
 - Uses a Groq-hosted language model for the translation response.
-- Scores likely slang terms in a sentence, then optionally adds bounded Urban Dictionary context for the strongest semantic anchor. A dictionary outage does not block translation.
+- Retrieves the closest entries from a small, versioned local glossary before it reaches for a bounded Urban Dictionary fallback. A dictionary outage does not block translation.
 - Includes a conversational brainrot mode and an adaptive Moss mascot that reacts to input intensity.
 
 ## Stack
@@ -16,6 +16,18 @@ BrainrotAI is a small web translator for moving between internet slang and clear
 - Material UI
 - Groq SDK
 - RapidAPI Urban Dictionary endpoint
+
+## Local glossary and source refresh
+
+`data/brainrot/glossary.json` is the checked-in runtime glossary. It is the fast first pass for translation context, so generated web text never silently becomes model context.
+
+`data/brainrot/terms.json` is the seed list. To refresh review candidates from the Wiktionary REST API and the Urban Dictionary RapidAPI endpoint, run:
+
+```bash
+npm run ingest:brainrot
+```
+
+The command writes `data/brainrot/web-glossary.json`, which is intentionally ignored by Git. Review each candidate for meaning, relevance, and harmful language before manually promoting a concise entry to `glossary.json`. Ordinary profanity is retained when it matters to meaning; slurs are excluded from generated candidates and model outputs.
 
 ## Run locally
 

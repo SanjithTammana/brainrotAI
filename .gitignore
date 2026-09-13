@@ -38,3 +38,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated source candidates are reviewed before any promotion to the runtime glossary.
+/data/brainrot/web-glossary.json

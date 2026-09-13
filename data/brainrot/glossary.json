@@ -1,0 +1,65 @@
+[
+  {
+    "term": "aura",
+    "aliases": ["aura points", "lost aura"],
+    "definition": "Social status, coolness, or perceived presence. It is often framed as something that can be gained or lost.",
+    "contexts": ["social status", "performance", "embarrassment"],
+    "example": "Missing the easy shot cost him aura.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "cooked",
+    "aliases": ["fully cooked", "absolutely cooked"],
+    "definition": "Exhausted, doomed, socially finished, or in a situation that is unlikely to go well. The intended sense depends on context.",
+    "contexts": ["school", "gaming", "social status", "fatigue"],
+    "example": "I forgot the assignment deadline, I am cooked.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "rizz",
+    "aliases": ["unspoken rizz", "negative rizz"],
+    "definition": "Charm or perceived ability to attract someone, especially through conversation or confidence.",
+    "contexts": ["dating", "social confidence"],
+    "example": "That introduction had negative rizz.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "cap",
+    "aliases": ["no cap", "that's cap"],
+    "definition": "A lie, exaggeration, or claim that is not believable. 'No cap' means sincerely or without exaggeration.",
+    "contexts": ["truthfulness", "emphasis"],
+    "example": "He said he finished it in ten minutes, but that is cap.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "fanum tax",
+    "aliases": ["fanum"],
+    "definition": "A joking claim to take someone else's food or a share of it.",
+    "contexts": ["food", "joking theft"],
+    "example": "You brought fries, so I am collecting the fanum tax.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "mog",
+    "aliases": ["mogged", "mogging"],
+    "definition": "To visibly outclass or overshadow someone, usually in appearance or social presence.",
+    "contexts": ["appearance", "comparison"],
+    "example": "He got mogged in every photo.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  },
+  {
+    "term": "yap",
+    "aliases": ["yapping", "yapper"],
+    "definition": "To talk too much, especially when the speaker is seen as rambling or adding little value.",
+    "contexts": ["conversation", "criticism"],
+    "example": "He has been yapping about the same movie for an hour.",
+    "source": "curated",
+    "lastReviewed": "2026-09-13"
+  }
+]

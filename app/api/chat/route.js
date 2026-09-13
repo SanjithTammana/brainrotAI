@@ -1,10 +1,11 @@
 import Groq from 'groq-sdk';
+import { formatRetrievedContext, retrieveBrainrotContext } from '../../../lib/brainrot-retriever';
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const MODEL = 'openai/gpt-oss-20b';
 
 const FAST_TRANSLATION_BRIEF =
-  'You are a precise, family-safe internet-slang translator. Preserve meaning, tone, and uncertainty. Do not invent lore, definitions, or context. Keep translations concise.';
+  'You are a precise internet-slang translator. Preserve meaning, tone, uncertainty, and ordinary profanity when it is part of the source. Do not invent lore, definitions, or context. Keep translations concise. Never output slurs or hateful content.';
 
 const SLANG_SIGNALS = new Set([
   'aura', 'brainrot', 'cap', 'cooked', 'delulu', 'fanum', 'goated', 'gyatt', 'mog',
@@ -54,6 +55,9 @@ function selectSemanticAnchor(message) {
 }
 
 async function getFastDictionaryContext(request, message) {
+  const localMatches = retrieveBrainrotContext(message);
+  if (localMatches.length) return formatRetrievedContext(localMatches);
+
   const anchor = selectSemanticAnchor(message);
   if (!anchor) return '';
 
